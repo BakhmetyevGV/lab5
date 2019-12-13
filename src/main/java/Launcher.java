@@ -20,5 +20,8 @@ public class Launcher {
         final Server pingServer = new Server(system);
         final Flow<HttpRequest, HttpResponse, NotUsed> httpFlow = pingServer.getHttpFlow(materializer);
 
+        final CompletionStage<ServerBinding> binding = http.bindAndHandle(
+
+
     }
 }
