@@ -22,9 +22,12 @@ public class Launcher {
 
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
                 httpFlow,
-                ConnectHttp.toHost(HOST_NAME, PORT),
+                ConnectHttp.toHost("localhost", PORT),
                 materializer
         );
+
+
+        System.out.println("Server online at " + HOST_NAME + ":" + PORT);
 
     }
 }
