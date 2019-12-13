@@ -1,7 +1,7 @@
 public class Result {
 
     public String testUrl;
-    public Long avgResponseTime;
+    public static Long avgResponseTime;
 
     public Result(String testUrl, Long avgResponseTime){
         this.testUrl = testUrl;

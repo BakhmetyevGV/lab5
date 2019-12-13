@@ -17,7 +17,7 @@ public class CacheActor extends AbstractActor {
                     sender().tell(new Result(pingRequest.testUrl, result), self());
                 })
                 .match(Result.class, (pingResult) ->
-                        cache.put(pingResult.testUrl, Result.)
+                        cache.put(pingResult.testUrl, Result.avgResponseTime)
                 )
                 .build();
     }
