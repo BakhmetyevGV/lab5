@@ -1,9 +1,13 @@
 import akka.actor.AbstractActor;
 import akka.japi.pf.ReceiveBuilder;
 
+import java.util.Map;
+
 public class CacheActor extends AbstractActor {
 
-    
+
+    public Map<String, Long> cache = new HashMap<>();
+
     @Override
     public Receive createReceive() {
         return ReceiveBuilder.create()
