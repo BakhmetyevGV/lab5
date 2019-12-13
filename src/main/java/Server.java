@@ -55,4 +55,18 @@ public class Server {
                             );
                 });
     }
+
+    private CompletionStage<Result> pingExecute(Request request, ActorMaterializer materializer) {
+        return Source
+                .from(Collections.singletonList(request))
+                .toMat(pingSink(), Keep.right())
+                .run(materializer)
+                .thenApply((sumTime) -> new Result(
+                        request.testUrl,
+                        sumTime / request.count / 3000)
+                );
+    }
+
+    
+
 }
