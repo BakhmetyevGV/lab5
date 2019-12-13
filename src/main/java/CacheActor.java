@@ -8,6 +8,7 @@ public class CacheActor extends AbstractActor {
                 .match(PingRequest.class, (pingRequest) -> {
                     Long result = cache.getOrDefault(pingRequest.getTestUrl(), -1L);
                     sender().tell(new PingResult(pingRequest.getTestUrl(), result), self());
+                })
                 }
     }
 }
