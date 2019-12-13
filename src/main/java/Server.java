@@ -20,7 +20,7 @@ public class Server {
     private AsyncHttpClient httpClient = Dsl.asyncHttpClient();
     private ActorRef cacheActor;
 
-    Server(ActorRef system){
+    Server(ActorSystem system){
         cacheActor = system.actorOf(Props.create(CacheActor.class));
     }
 
