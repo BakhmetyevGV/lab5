@@ -1,15 +1,14 @@
 import akka.NotUsed;
 import akka.actor.ActorRef;
 import akka.actor.Props;
+import akka.http.javadsl.model.*;
+import akka.pattern.Patterns;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.Dsl;
-import scala.Int;
+import java.util.concurrent.CompletableFuture;
 
-import javax.management.Query;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 
 public class Server {
     private AsyncHttpClient httpClient = Dsl.asyncHttpClient();
@@ -29,5 +28,25 @@ public class Server {
 
                     return new Request(testUrl, count);
                 })
+                .mapAsync(6, (pingRequest) -> Patterns.ask(cacheActor, pingRequest, 3000)
+                    .thenCompose((result) -> {
+                        Result cachePingResult = (Result) result;
+
+                        return cachePingResult.getAvgResponseTime() == -1 ?
+                                pingExecute(piActorRefngRequest, materializer)
+                                : CompletableFuture.completedFuture(cachePingResult);
+                    }))
+                .map(result -> {
+                    cacheActor.tell(result, ActorRef.noSender());
+
+                    return HttpResponse
+                            .create()
+                            .withStatus(StatusCodes.OK)
+                            .withEntity(
+                                    HttpEntities.create(
+                                            result.testUrl + " " + result.avgResponseTime
+                                    )
+                            );
+                });
     }
 }
