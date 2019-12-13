@@ -67,6 +67,19 @@ public class Server {
                 );
     }
 
-    
+    private Sink<Request, CompletionStage<Long>> pingSink() {
+        return Flow.<Request>create()
+                .mapConcat((pingRequest) -> Collections.nCopies(pingRequest.count, pingRequest.testUrl))
+                .mapAsync(6, (url) -> {
+                    long startTime = System.nanoTime();
+
+                    return httpClient
+                            .prepareGet(url)
+                            .execute()
+                            .toCompletableFuture()
+                            .thenApply((response) -> System.nanoTime() - startTime);
+                })
+                .toMat(Sink.fold(0L, Long::sum), Keep.right());
+    }
 
 }
