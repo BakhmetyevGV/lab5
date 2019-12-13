@@ -39,7 +39,7 @@ public class Server {
                         Result cachePingResult = (Result) result;
 
                         return cachePingResult.getAvgResponseTime() == -1 ?
-                                pingExecute(piActorRefngRequest, materializer)
+                                pingExecute(pingRequest, materializer)
                                 : CompletableFuture.completedFuture(cachePingResult);
                     }))
                 .map(result -> {
