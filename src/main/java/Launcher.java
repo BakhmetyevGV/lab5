@@ -28,6 +28,7 @@ public class Launcher {
 
 
         System.out.println("Server online at " + "localhost" + ":" + 8080);
+        System.in.read();
 
     }
 }
