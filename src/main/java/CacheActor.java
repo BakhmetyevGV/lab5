@@ -6,5 +6,7 @@ public class CacheActor extends AbstractActor {
     public Receive createReceive() {
         return ReceiveBuilder.create()
                 .match(PingRequest.class, (pingRequest) -> {
+                    Long result = cache.getOrDefault(pingRequest.getTestUrl(), -1L);
+                }
     }
 }
