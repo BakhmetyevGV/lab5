@@ -6,4 +6,12 @@ public class Request {
         this.testUrl = testUrl;
         this.count = count;
     }
+
+    public String getTestUrl() {
+        return testUrl;
+    }
+
+    public int getCount() {
+        return count;
+    }
 }
