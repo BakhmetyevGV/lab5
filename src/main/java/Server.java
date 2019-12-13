@@ -1,14 +1,10 @@
-import akka.NotUsed;
-import akka.actor.ActorRef;
-import akka.actor.Props;
-import akka.http.javadsl.model.*;
-import akka.pattern.Patterns;
-import akka.stream.ActorMaterializer;
-import akka.stream.javadsl.Flow;
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.Dsl;
-import java.util.concurrent.CompletableFuture;
 
+import java.time.Duration;
+import java.util.Collections;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 public class Server {
     private AsyncHttpClient httpClient = Dsl.asyncHttpClient();
