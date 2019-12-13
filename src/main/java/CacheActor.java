@@ -13,11 +13,11 @@ public class CacheActor extends AbstractActor {
     public Receive createReceive() {
         return ReceiveBuilder.create()
                 .match(Request.class, (pingRequest) -> {
-                    Long result = cache.getOrDefault(pingRequest.getTestUrl(), -1L);
-                    sender().tell(new Result(pingRequest.getTestUrl(), result), self());
+                    Long result = cache.getOrDefault(pingRequest.testUrl, -1L);
+                    sender().tell(new Result(pingRequest.testUrl, result), self());
                 })
                 .match(Result.class, (pingResult) ->
-                        cache.put(pingResult.getTestUrl(), Result.getAverageResponseTime())
+                        cache.put(pingResult.testUrl, Result.)
                 )
                 .build();
     }
