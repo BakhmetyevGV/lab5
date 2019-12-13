@@ -18,5 +18,7 @@ public class Launcher {
         final ActorMaterializer materializer = ActorMaterializer.create(system);
 
         final Server pingServer = new Server(system);
+        final Flow<HttpRequest, HttpResponse, NotUsed> httpFlow = pingServer.getHttpFlow(materializer);
+
     }
 }
