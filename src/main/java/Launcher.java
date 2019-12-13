@@ -17,6 +17,6 @@ public class Launcher {
         final Http http = Http.get(system);
         final ActorMaterializer materializer = ActorMaterializer.create(system);
 
-        
+        final Server pingServer = new Server(system);
     }
 }
