@@ -13,6 +13,6 @@ import java.util.concurrent.CompletionStage;
 
 public class Launcher {
     public static void main(String[] args) throws IOException {
-        StreamRefMessages.ActorRef system = StreamRefMessages.ActorRef.create("ping");
+        ActorSystem system = ActorSystem.create("ping");
     }
 }
