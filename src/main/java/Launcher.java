@@ -31,6 +31,7 @@ public class Launcher {
         System.in.read();
 
         binding
+                .thenCompose(ServerBinding::unbind)
 
     }
 }
