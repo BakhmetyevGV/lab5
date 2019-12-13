@@ -32,6 +32,7 @@ public class Launcher {
 
         binding
                 .thenCompose(ServerBinding::unbind)
+                .thenAccept(unbound -> system.terminate());
 
     }
 }
