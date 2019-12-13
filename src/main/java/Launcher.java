@@ -14,6 +14,6 @@ import java.util.concurrent.CompletionStage;
 public class Launcher {
     public static void main(String[] args) throws IOException {
         ActorSystem system = ActorSystem.create("ping");
-        
+        final Http http = Http.get(system);
     }
 }
